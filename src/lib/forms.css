@@ -1,0 +1,22 @@
+form {
+  margin: 0;
+}
+input,
+textarea,
+select {
+  display: block;
+  outline: 0;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  border-radius: 0;
+  border: 1px solid #000;
+  position: relative;
+  font-size: inherit;
+  width: 100%;
+}
+textarea {
+  max-width: 100%;
+  margin-bottom: 0.5em;
+  overflow: auto;
+  resize: vertical;
+}

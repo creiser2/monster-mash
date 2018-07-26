@@ -9,13 +9,15 @@ class MonsterContainer extends Component {
 
   render() {
     return (
-      <SketchField
-        width="1024px"
-        height="768px"
-        tool={Tools.Pencil}
-        lineColor="black"
-        lineWidth={6}
-      />
+      <div className="dashed border z1 abs sq">
+        <SketchField
+          width="100%"
+          height="100%"
+          tool={Tools.Pencil}
+          lineColor="black"
+          lineWidth={5}
+        />
+      </div>
     );
   }
 }

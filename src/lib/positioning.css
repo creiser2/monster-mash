@@ -1,0 +1,18 @@
+.rel { position: relative }
+.abs { position: absolute }
+.fix { position: fixed }
+.fill, .top { top: 0 }
+.fill, .bottom { bottom: 0 }
+.fill, .left { left: 0 }
+.fill, .right { right: 0 }
+.x { width: 100% }
+.y { height: 100% }
+.fit{ max-width:100% }
+
+.mw-1 { max-width: 24rem }
+.mw-2 { max-width: 32rem }
+.mw-3 { max-width: 48rem }
+.mw-4 { max-width: 64rem }
+
+.fll { float:left }
+.flr { float:right }

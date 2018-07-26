@@ -1,5 +1,95 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+@import './lib/reset.css';
+@import './lib/display.css';
+@import './lib/positioning.css';
+@import './lib/flexbox.css';
+@import './lib/align.css';
+@import './lib/spacing.css';
+@import './lib/buttons.css';
+@import './lib/forms.css';
+@import './lib/lists.css';
+@import './lib/typography.css';
+@import './lib/z-index.css';
+
+
+/* Borders and Rounding */
+.border{ border: 2px solid #000  }
+  
+  .border-top{
+    border-top-style:solid;
+    border-top-width: 1px;
+  }
+  
+  .border-right{
+    border-right-style:solid;
+    border-right-width: 1px;
+  }
+  
+  .border-bottom{
+    border-bottom-style:solid;
+    border-bottom-width: 1px;
+  }
+  
+  .border-left{
+    border-left-style:solid;
+    border-left-width: 1px;
+  }
+
+  .border-dark { border-color: #222 }
+  
+  .border-none{ border:0 }
+
+  .dashed { border-style: dashed }
+  
+  .rounded{ border-radius: 3px }
+  .circle{ border-radius:50% }
+  
+  .rounded-top{ border-radius: 3px 3px 0 0 }
+  .rounded-right{ border-radius: 0 3px 3px 0 }
+  .rounded-bottom{ border-radius: 0 0 3px 3px }
+  .rounded-left{ border-radius: 3px 0 0 3px }
+  
+/* Breakpoints */
+@media (max-width: 40em){
+    .xs-hide{ display:none !important }
+    
+    .mobile-button { position: fixed;  }
+  }
+  
+  @media (min-width: 40em) and (max-width: 52em){
+    .sm-hide{ display:none !important }
+
+    .mobile-button { position: fixed;  }
+  }
+  
+  @media (min-width: 52em) and (max-width: 64em){
+    .md-hide{ display:none !important }
+  }
+  
+  @media (min-width: 64em){
+    .lg-hide{ display:none !important }
+  }
+  
+  
+/* Custom */
+
+.bg-white { background: #fff }
+
+.bg-90 { background: #222222e3 }
+
+.logo { max-width: 10em }
+
+.white { color: #fff }
+.dark { color: #222 }
+
+.bxs { box-shadow: 0px 0px 5px #00000082; }
+
+.pointer { cursor: pointer }
+
+.guyBG { 
+  background: url('./guy.svg'); height: 40em;
+  width: 24em;
+  background-size: contain;
+  background-repeat: no-repeat; 
 }
+
+.sq { width: 400px; height:400px; }
