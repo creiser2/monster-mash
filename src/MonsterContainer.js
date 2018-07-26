@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Two from 'two.js';
+import Two from './two.js/two.min.js';
 
 class MonsterContainer extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class MonsterContainer extends Component {
   componentDidMount() {
     const stage = this.refs;
     console.log(stage);
-    // this.two.appendTo(stage);
+    this.two.appendTo(stage);
   }
 
   render() {
