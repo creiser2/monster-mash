@@ -9,8 +9,8 @@ import SignUp from '../components/SignUp';
 
 class App extends Component {
 
-  handleLogin = (event) => {
-    event.preventDefault
+  handleLogin = (event,loginState) => {
+    event.preventDefault()
     debugger;
   }
 

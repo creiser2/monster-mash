@@ -2,15 +2,37 @@ import React, { Component } from 'react'
 
 
 class Login extends Component {
+  state={
+    username: "",
+    password: "",
+  }
+
+  handleUsernameInput = (event) => {
+      this.setState({
+        username: event.target.value
+      })
+  }
+
+  handlePasswordInput = (event) => {
+      this.setState({
+        password: event.target.value
+      })
+  }
+
+
   render() {
-    console.log(this.props)
+
     return(
-      <form onSubmit={this.props.onSubmit}>
+      <form onSubmit = {this.props.onSubmit} >
         <label>
           username:
-          <input value={""} />
+          <input value = {this.state.username} onChange = {this.handleUsernameInput} />
         </label>
-        <input type="submit" value="Submit" />
+        <label>
+          password:
+          <input value = {this.state.password} onChange = {this.handlePasswordInput} />
+        </label>
+        <input type = "submit" value = "Submit" />
       </form>
     )
   }
