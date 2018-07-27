@@ -23,7 +23,7 @@ class Login extends Component {
   render() {
 
     return(
-      <form onSubmit = {(event) => this.props.onSubmit(event,this.state)} >
+      <form onSubmit = {(event) => this.props.onSubmit(event,this.state)} className="mw-1 mxa">
         <label>
           username:
           <input type = "text" value = {this.state.username} onChange = {this.handleUsernameInput} />
