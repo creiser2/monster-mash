@@ -13,10 +13,15 @@ const link = {
 
 export const NavBar = (props) => {
   return(
-    <div className="px05 fa flr">
-      <NavLink to="/home">Home</NavLink>
-      <NavLink to="/login">Login</NavLink>
-      <NavLink to="/sign-up">Sign Up</NavLink>
+    <div className="x f aic jce">
+      <div className="fa jss">
+        <h3>Monster Mash</h3>
+      </div>
+    <div className="fa jss flr">
+      <NavLink to="/home" className="px05 fa flr">Home</NavLink>
+      <NavLink to="/login" className="px05 fa flr">Login</NavLink>
+      <NavLink to="/sign-up" className="px05 fa flr">Sign Up</NavLink>
+    </div>
     </div>
   )
 }

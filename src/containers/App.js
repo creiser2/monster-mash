@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 //routes
@@ -8,31 +8,29 @@ import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 
 class App extends Component {
-
-  handleLogin = (event) => {
-    event.preventDefault
-    debugger;
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
   }
 
   //when someone signs up this is triggered
-  onSubmit = (event) => {
+  handleSignUpSubmit = (event, formInfo) => {
     event.preventDefault()
+    console.log(formInfo)
   }
 
   render() {
     return (
       <div className="App">
-        <div className="x f aic jce">
-          <div className="fa jss">
-            <h3>Monster Mash</h3>
-          </div>
+        <div>
           <Router>
-            <div className="fa jss">
+            <Fragment>
               <NavBar />
               <Route exact path="/home" component={Home} />
-              <Route exact path="/login" render={(routerProps) => <Login {...routerProps} onSubmit={this.handleLogin}/>} />
-              <Route exact path="/sign-up" render={(routerProps)=><SignUp {...routerProps} onSubmit={this.onSubmit}/>} />
-            </div>
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/sign-up" render={(routerProps)=><SignUp {...routerProps} value={this.state.signUpValue} onSubmit={this.handleSignUpSubmit}/>} />
+            </Fragment>
           </Router>
         </div>
     </div>
