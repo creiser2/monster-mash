@@ -23,14 +23,14 @@ class Login extends Component {
   render() {
 
     return(
-      <form onSubmit = {this.props.onSubmit} >
+      <form onSubmit = {(event) => this.props.onSubmit(event,this.state)} >
         <label>
           username:
-          <input value = {this.state.username} onChange = {this.handleUsernameInput} />
+          <input type = "text" value = {this.state.username} onChange = {this.handleUsernameInput} />
         </label>
         <label>
           password:
-          <input value = {this.state.password} onChange = {this.handlePasswordInput} />
+          <input type = "password" value = {this.state.password} onChange = {this.handlePasswordInput} />
         </label>
         <input type = "submit" value = "Submit" />
       </form>
