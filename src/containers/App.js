@@ -12,6 +12,10 @@ class App extends Component {
     super(props);
     this.state = {
     };
+
+  //when someone logs in this is triggered
+  handleLogin = (event , loginState) => {
+    event.preventDefault()
   }
 
   //when someone signs up this is triggered
