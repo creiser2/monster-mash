@@ -12,6 +12,7 @@ class App extends Component {
     super(props);
     this.state = {
     };
+  }
 
   //when someone logs in this is triggered
   handleLogin = (event , loginState) => {
@@ -32,7 +33,7 @@ class App extends Component {
             <Fragment>
               <NavBar />
               <Route exact path="/home" component={Home} />
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/login" render={(routerProps) => <Login {...routerProps} onSubmit={this.handleLogin}/>} />
               <Route exact path="/sign-up" render={(routerProps)=><SignUp {...routerProps} value={this.state.signUpValue} onSubmit={this.handleSignUpSubmit}/>} />
             </Fragment>
           </Router>
