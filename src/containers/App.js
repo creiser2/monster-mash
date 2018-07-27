@@ -11,9 +11,6 @@ class App extends Component {
 
   handleLogin = (event , loginState) => {
     event.preventDefault()
-    console.log("check event",event.target)
-    debugger;
-
   }
 
   //when someone signs up this is triggered
