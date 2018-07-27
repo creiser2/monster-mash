@@ -3,9 +3,15 @@ import React, { Component } from 'react'
 
 class Login extends Component {
   render() {
-    console.log("login")
+    console.log(this.props)
     return(
-      true
+      <form onSubmit={this.props.onSubmit}>
+        <label>
+          username:
+          <input value={""} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
     )
   }
 }

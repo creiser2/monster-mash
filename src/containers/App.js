@@ -9,6 +9,11 @@ import SignUp from '../components/SignUp';
 
 class App extends Component {
 
+  handleLogin = (event) => {
+    event.preventDefault
+    debugger;
+  }
+
   //when someone signs up this is triggered
   onSubmit = (event) => {
     event.preventDefault()
@@ -25,7 +30,7 @@ class App extends Component {
             <div className="fa jss">
               <NavBar />
               <Route exact path="/home" component={Home} />
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/login" render={(routerProps) => <Login {...routerProps} onSubmit={this.handleLogin}/>} />
               <Route exact path="/sign-up" render={(routerProps)=><SignUp {...routerProps} onSubmit={this.onSubmit}/>} />
             </div>
           </Router>
