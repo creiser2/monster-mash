@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 //routes
-import MonsterContainer from './MonsterContainer';
 import NavBar from '../components/NavBar';
-import Home from '../components/Home';
+import Home from './Home';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 
 class App extends Component {
 
-
+  //when someone signs up this is triggered
+  onSubmit = (event) => {
+    event.preventDefault()
+  }
 
   render() {
     return (
@@ -22,15 +24,13 @@ class App extends Component {
           <Router>
             <div className="fa jss">
               <NavBar />
-              <Route exact path="/" component={Home} />
+              <Route exact path="/home" component={Home} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/sign-up" component={SignUp} />
+              <Route exact path="/sign-up" render={(routerProps)=><SignUp {...routerProps} onSubmit={this.onSubmit}/>} />
             </div>
           </Router>
         </div>
-        <MonsterContainer />
-        <div className="guyBG mxa" />
-      </div>
+    </div>
     );
   }
 }

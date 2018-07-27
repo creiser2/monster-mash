@@ -14,7 +14,7 @@ const link = {
 export const NavBar = (props) => {
   return(
     <div className="px05 fa flr">
-      <NavLink to="/">Home</NavLink>
+      <NavLink to="/home">Home</NavLink>
       <NavLink to="/login">Login</NavLink>
       <NavLink to="/sign-up">Sign Up</NavLink>
     </div>
