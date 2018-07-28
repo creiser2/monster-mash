@@ -13,16 +13,10 @@ const link = {
 
 export const NavBar = props => {
   return (
-    <div className="px05 fa f flr">
-      <NavLink className="px05 fa flr" to="/">
-        Home
-      </NavLink>
-      <NavLink className="px05 fa flr" to="/login">
-        Login
-      </NavLink>
-      <NavLink className="px05 fa flr" to="/sign-up">
-        Sign Up
-      </NavLink>
+    <div className="px05 fa flr">
+      <NavLink to="/home">Home</NavLink>
+      <NavLink to="/login">Login</NavLink>
+      <NavLink to="/sign-up">Sign Up</NavLink>
     </div>
   );
 };
