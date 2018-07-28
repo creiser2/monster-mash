@@ -8,17 +8,23 @@ const link = {
   margin: '0 6px 6px',
   background: 'blue',
   textDecoration: 'none',
-  color: 'white',
-}
+  color: 'white'
+};
 
-export const NavBar = (props) => {
-  return(
-    <div className="px05 fa flr">
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/login">Login</NavLink>
-      <NavLink to="/sign-up">Sign Up</NavLink>
+export const NavBar = props => {
+  return (
+    <div className="px05 fa f flr">
+      <NavLink className="px05 fa flr" to="/">
+        Home
+      </NavLink>
+      <NavLink className="px05 fa flr" to="/login">
+        Login
+      </NavLink>
+      <NavLink className="px05 fa flr" to="/sign-up">
+        Sign Up
+      </NavLink>
     </div>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;
