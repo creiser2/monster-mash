@@ -6,6 +6,7 @@ import NavBar from '../components/NavBar';
 import Home from './Home';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
+import GenerateMonster from '../components/GenerateMonster';
 
 class App extends Component {
   constructor(props) {
@@ -20,31 +21,27 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="x f aic jce">
-          <div className="fa jss">
-            <h3>Monster Mash</h3>
+      <Router>
+        <div className="App">
+          <NavBar />
+          <div className="gutter">
+            <Route exact path="/" component={GenerateMonster} />
+            <Route exact path="/draw" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route
+              exact
+              path="/sign-up"
+              render={routerProps => (
+                <SignUp
+                  {...routerProps}
+                  value={this.state.signUpValue}
+                  onSubmit={this.onSubmit}
+                />
+              )}
+            />
           </div>
-          <Router>
-            <div className="fa jss">
-              <NavBar />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route
-                exact
-                path="/sign-up"
-                render={routerProps => (
-                  <SignUp
-                    {...routerProps}
-                    value={this.state.signUpValue}
-                    onSubmit={this.onSubmit}
-                  />
-                )}
-              />
-            </div>
-          </Router>
         </div>
-      </div>
+      </Router>
     );
   }
 }

@@ -8,21 +8,28 @@ class MonsterContainer extends Component {
   }
   getImage = e => {
     e.preventDefault();
-    console.log(document.getElementsByTagName('canvas')[0].toDataURL());
+    const pngURI = document.getElementsByTagName('canvas')[0].toDataURL();
+    const data = { user_id: 1, url: pngURI };
+    // const form = document.querySelector('#form1');
+    // const data = new FormData(form);
+    // const blob = new Blob([pngURI], {
+    //   type: 'image/png',
+    //   filename: 'monster.png'
+    // });
 
-    const form = document.querySelector('#form1');
-    const data = new FormData(form);
-    data.append('user_id', 1);
-    data.append(
-      'image',
-      document.getElementsByTagName('canvas')[0].toDataURL()
-    );
-    console.log(data);
+    // console.log(blob);
+
+    // data.append('user_id', 1);
+    // data.append('image', blob);
+    // console.log(data);
 
     fetch(`http://localhost:3000/api/v1/heads`, {
       method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
       mode: 'no-cors',
-      body: data
+      body: JSON.stringify(data)
     })
       .then(r => r.json())
       .then(r => console.log(r));
@@ -30,26 +37,30 @@ class MonsterContainer extends Component {
 
   render() {
     return (
-      <div className="dashed border z1 abs sq">
-        <SketchField
-          width="100%"
-          height="100%"
-          tool={Tools.Pencil}
-          lineColor="black"
-          lineWidth={5}
-        />
-
-        <form id="form1">
-          <input type="file" name="image" id="image_upload" accept="image/*" />
-          <input
-            type="submit"
-            value="Submit"
-            id="submit"
-            onClick={this.getImage}
+      <div className="f jic aic mt1">
+        <div className="fa dashed border sq">
+          <SketchField
+            width="100%"
+            height="100%"
+            tool={Tools.Pencil}
+            lineColor="black"
+            lineWidth={5}
           />
-        </form>
 
-        {/* <button onClick={this.getImage}>Submit</button> */}
+          {/* <form id="form1">
+            <input type="file" name="image" id="image_upload" accept="image/*" />
+            <input
+              type="submit"
+              value="Submit"
+              id="submit"
+              onClick={this.getImage}
+            />
+          </form> */}
+
+          <button className="border px1 py05 mt1 h5" onClick={this.getImage}>
+            Submit
+          </button>
+        </div>
       </div>
     );
   }
