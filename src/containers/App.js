@@ -11,7 +11,13 @@ import GenerateMonster from '../components/GenerateMonster';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      token: "",
+      username: "",
+      bio: "",
+      single: false,
+      logged_in: false,
+    };
   }
 
   //when someone logs in this is triggered
@@ -22,7 +28,26 @@ class App extends Component {
   //when someone signs up this is triggered
   handleSignUpSubmit = (event, formInfo) => {
     event.preventDefault();
-    console.log(formInfo);
+    fetch('http://localhost:4000/api/v1/users', {
+      headers: {'Content-Type': 'application/json'},
+      method: 'POST',
+      body: JSON.stringify({
+        username: formInfo.username,
+        password: formInfo.password,
+        bio: formInfo.bio,
+        single: formInfo.single
+      })
+    }).then(response => response.json())
+    .then(json => {
+      debugger;
+      localStorage.setItem("token", json.token)
+      this.setState({
+        token: json.token,
+        username: json.user_details.username,
+        bio: json.user_details.bio,
+        single: json.user_details.single,
+        logged_in: true
+    })})
   };
 
   render() {
