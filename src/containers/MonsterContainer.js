@@ -40,6 +40,7 @@ class MonsterContainer extends Component {
         />
 
         <form id="form1">
+          <input type="file" name="image" id="image_upload" accept="image/*" />
           <input
             type="submit"
             value="Submit"
