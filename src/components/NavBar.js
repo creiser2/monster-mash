@@ -14,9 +14,9 @@ const link = {
 export const NavBar = props => {
   return (
     <div className="x f aic jce px1">
-      <div className="fa jss">
+      <NavLink to="/" className="fa jss no-under">
         <h3>Monster Mash</h3>
-      </div>
+      </NavLink>
       <div className="fa jss">
         <div className="flr f aic l4">
           <NavLink to="/" className="px05 fa">

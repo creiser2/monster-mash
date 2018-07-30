@@ -32,7 +32,7 @@ class GenerateMonster extends Component {
 
   render() {
     return (
-      <div>
+      <div className="monster">
         <img
           src={this.randomPart(this.state.heads, 'head')}
           width="100%"
