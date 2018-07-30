@@ -93,13 +93,6 @@ a { color: #f000ff }
 
 .pointer { cursor: pointer }
 
-.guyBG { 
-  background: url('./guy.svg'); height: 40em;
-  width: 24em;
-  background-size: contain;
-  background-repeat: no-repeat; 
-}
-
 .sq { width: 400px; height:400px }
 
 .l4 { line-height: 4rem }
