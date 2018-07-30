@@ -10,15 +10,13 @@ import SignUp from '../components/SignUp';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      signUpValue= ""
-    };
+    this.state = {};
   }
 
   //when someone signs up this is triggered
-  onSubmit = (event) => {
-    event.preventDefault()
-  }
+  onSubmit = event => {
+    event.preventDefault();
+  };
 
   render() {
     return (
@@ -32,11 +30,21 @@ class App extends Component {
               <NavBar />
               <Route exact path="/home" component={Home} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/sign-up" render={(routerProps)=><SignUp {...routerProps} value={this.state.signUpValue} onSubmit={this.onSubmit}/>} />
+              <Route
+                exact
+                path="/sign-up"
+                render={routerProps => (
+                  <SignUp
+                    {...routerProps}
+                    value={this.state.signUpValue}
+                    onSubmit={this.onSubmit}
+                  />
+                )}
+              />
             </div>
           </Router>
         </div>
-    </div>
+      </div>
     );
   }
 }

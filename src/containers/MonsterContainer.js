@@ -6,9 +6,28 @@ class MonsterContainer extends Component {
     super(props);
     this.state = {};
   }
-  getImage = () => {
+  getImage = e => {
+    e.preventDefault();
     console.log(document.getElementsByTagName('canvas')[0].toDataURL());
+
+    const form = document.querySelector('#form1');
+    const data = new FormData(form);
+    data.append('user_id', 1);
+    data.append(
+      'image',
+      document.getElementsByTagName('canvas')[0].toDataURL()
+    );
+    console.log(data);
+
+    fetch(`http://localhost:3000/api/v1/heads`, {
+      method: 'POST',
+      mode: 'no-cors',
+      body: data
+    })
+      .then(r => r.json())
+      .then(r => console.log(r));
   };
+
   render() {
     return (
       <div className="dashed border z1 abs sq">
@@ -19,7 +38,17 @@ class MonsterContainer extends Component {
           lineColor="black"
           lineWidth={5}
         />
-        <button onClick={this.getImage}>Get Image</button>
+
+        <form id="form1">
+          <input
+            type="submit"
+            value="Submit"
+            id="submit"
+            onClick={this.getImage}
+          />
+        </form>
+
+        {/* <button onClick={this.getImage}>Submit</button> */}
       </div>
     );
   }
