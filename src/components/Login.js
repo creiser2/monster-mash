@@ -1,24 +1,22 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
 
 class Login extends Component {
-  state={
-    username: "",
-    password: "",
-  }
+  state = {
+    username: '',
+    password: ''
+  };
 
-  handleUsernameInput = (event) => {
-      this.setState({
-        username: event.target.value
-      })
-  }
+  handleUsernameInput = event => {
+    this.setState({
+      username: event.target.value
+    });
+  };
 
-  handlePasswordInput = (event) => {
-      this.setState({
-        password: event.target.value
-      })
-  }
-
+  handlePasswordInput = event => {
+    this.setState({
+      password: event.target.value
+    });
+  };
 
   render() {
 
@@ -34,8 +32,8 @@ class Login extends Component {
         </label>
         <input type = "submit" value = "Submit" />
       </form>
-    )
+    );
   }
 }
 
-export default Login
+export default Login;

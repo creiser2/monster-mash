@@ -39,7 +39,6 @@ class App extends Component {
       })
     }).then(response => response.json())
     .then(json => {
-      debugger;
       localStorage.setItem("token", json.token)
       this.setState({
         token: json.token,
