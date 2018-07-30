@@ -10,6 +10,18 @@ class MonsterContainer extends Component {
     e.preventDefault();
     const pngURI = document.getElementsByTagName('canvas')[0].toDataURL();
     const data = { user_id: 1, url: pngURI };
+    fetch(`http://localhost:3000/api/v1/heads`, {
+      method: 'POST',
+
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(r => r.json())
+      .then(r => console.log(r));
+
     // const form = document.querySelector('#form1');
     // const data = new FormData(form);
     // const blob = new Blob([pngURI], {
@@ -22,17 +34,6 @@ class MonsterContainer extends Component {
     // data.append('user_id', 1);
     // data.append('image', blob);
     // console.log(data);
-
-    fetch(`http://localhost:3000/api/v1/heads`, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      mode: 'no-cors',
-      body: JSON.stringify(data)
-    })
-      .then(r => r.json())
-      .then(r => console.log(r));
   };
 
   render() {
