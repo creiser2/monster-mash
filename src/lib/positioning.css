@@ -6,6 +6,7 @@
 .fill, .left { left: 0 }
 .fill, .right { right: 0 }
 .x { width: 100% }
+.x50 { width: 50% }
 .y { height: 100% }
 .fit{ max-width:100% }
 

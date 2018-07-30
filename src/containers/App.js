@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 //routes
@@ -14,9 +14,15 @@ class App extends Component {
     this.state = {};
   }
 
-  //when someone signs up this is triggered
-  onSubmit = event => {
+  //when someone logs in this is triggered
+  handleLogin = (event, loginState) => {
     event.preventDefault();
+  };
+
+  //when someone signs up this is triggered
+  handleSignUpSubmit = (event, formInfo) => {
+    event.preventDefault();
+    console.log(formInfo);
   };
 
   render() {
@@ -25,9 +31,15 @@ class App extends Component {
         <div className="App">
           <NavBar />
           <div className="gutter">
-            <Route exact path="/" component={GenerateMonster} />
+            <Route exact path="/" component={Home} />
             <Route exact path="/draw" component={Home} />
-            <Route exact path="/login" component={Login} />
+            <Route
+              exact
+              path="/login"
+              render={routerProps => (
+                <Login {...routerProps} onSubmit={this.handleLogin} />
+              )}
+            />
             <Route
               exact
               path="/sign-up"
@@ -35,7 +47,7 @@ class App extends Component {
                 <SignUp
                   {...routerProps}
                   value={this.state.signUpValue}
-                  onSubmit={this.onSubmit}
+                  onSubmit={this.handleSignUpSubmit}
                 />
               )}
             />

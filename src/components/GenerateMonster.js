@@ -10,10 +10,15 @@ class GenerateMonster extends Component {
     };
   }
 
+  createPartsArray = json => {
+    const partsArray = json.map(head => head.url);
+    this.setState({ heads: partsArray });
+  };
+
   componentDidMount() {
-    // fetch('http://localhost:3000/api/v1/heads')
-    //   .then(r => r.json())
-    //   .then(r => this.setState({ heads: [r] }));
+    fetch('http://localhost:3000/api/v1/heads')
+      .then(r => r.json())
+      .then(r => this.createPartsArray(r));
     // fetch('http://localhost:3000/api/v1/hands')
     //   .then(r => r.json())
     //   .then(r => this.setState({ hands: [r] }));
