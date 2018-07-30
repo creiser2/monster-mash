@@ -12,9 +12,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      token: "",
-      username: "",
-      bio: "",
+      token: '',
+      username: '',
+      bio: '',
       single: false,
       logged_in: false,
       heads: [],
@@ -49,7 +49,7 @@ class App extends Component {
   handleSignUpSubmit = (event, formInfo) => {
     event.preventDefault();
     fetch('http://localhost:3000/api/v1/users', {
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify({
         username: formInfo.username,
@@ -57,17 +57,19 @@ class App extends Component {
         bio: formInfo.bio,
         single: formInfo.single
       })
-    }).then(response => response.json())
-    .then(json => {
-      debugger;
-      localStorage.setItem("token", json.token)
-      this.setState({
-        token: json.token,
-        username: json.user_details.username,
-        bio: json.user_details.bio,
-        single: json.user_details.single,
-        logged_in: true
-    })})
+    })
+      .then(response => response.json())
+      .then(json => {
+        debugger;
+        localStorage.setItem('token', json.token);
+        this.setState({
+          token: json.token,
+          username: json.user_details.username,
+          bio: json.user_details.bio,
+          single: json.user_details.single,
+          logged_in: true
+        });
+      });
   };
 
   render() {
