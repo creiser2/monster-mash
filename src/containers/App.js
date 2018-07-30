@@ -28,7 +28,7 @@ class App extends Component {
   //when someone signs up this is triggered
   handleSignUpSubmit = (event, formInfo) => {
     event.preventDefault();
-    fetch('http://localhost:4000/api/v1/users', {
+    fetch('http://localhost:3000/api/v1/users', {
       headers: {'Content-Type': 'application/json'},
       method: 'POST',
       body: JSON.stringify({
@@ -39,6 +39,7 @@ class App extends Component {
       })
     }).then(response => response.json())
     .then(json => {
+      debugger;
       localStorage.setItem("token", json.token)
       this.setState({
         token: json.token,
