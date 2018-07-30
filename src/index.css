@@ -78,6 +78,8 @@
   
 /* Custom */
 
+a { color: #f000ff }
+
 .bg-white { background: #fff }
 
 .bg-90 { background: #222222e3 }
@@ -98,6 +100,29 @@
   background-repeat: no-repeat; 
 }
 
-.sq { width: 400px; height:400px; }
+.sq { width: 400px; height:400px }
 
-.l4 { line-height: 4rem; }
+.l4 { line-height: 4rem }
+
+.logo { max-width:20em }
+
+button:hover, .button:hover, a:hover, .logo:hover {
+  filter: hue-rotate(1080deg);
+  transition: 5s;
+}
+
+button, .button {
+  background: #eb9bff;
+  border: 1px solid #cd3fd8;
+  -webkit-box-shadow: inset 0px -2px 17px -4px #bb00a4;
+  box-shadow: inset 0px -2px 17px -4px #bb00a4;
+  border-radius: 20px;
+  color: #a500af;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* button:hover {
+  box-shadow: inset 0px 3px 17px -4px #bb00a4;
+  transition: .2s;
+} */

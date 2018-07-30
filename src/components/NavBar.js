@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import logo from '../logo.svg';
 
 /* Add basic styling for NavLinks */
 const link = {
@@ -15,7 +16,7 @@ export const NavBar = props => {
   return (
     <div className="x f aic jce px1">
       <NavLink to="/" className="fa jss no-under">
-        <h3>Monster Mash</h3>
+        <img src={logo} className="logo" />
       </NavLink>
       <div className="fa jss">
         <div className="flr f aic l4">

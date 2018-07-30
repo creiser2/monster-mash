@@ -32,7 +32,8 @@ class GenerateMonster extends Component {
 
   render() {
     return (
-      <div className="monster">
+      <div className="monster ac">
+        <button className="px2 py05 mb1 h5">New Monster</button>
         <img
           src={this.randomPart(this.state.heads, 'head')}
           width="100%"
