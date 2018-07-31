@@ -24,8 +24,12 @@ class App extends Component {
   }
 
   createPartsArray = (json, partName) => {
-    const partsArray = json.map(part => part.url);
-    this.setState({ [partName]: partsArray });
+    if (json.status != 500) {
+      const partsArray = json.map(part => part.url);
+      this.setState({ [partName]: partsArray }, () =>
+        console.log('app state change', this.state)
+      );
+    }
   };
 
   componentDidMount() {
@@ -107,6 +111,17 @@ class App extends Component {
                 />
               )}
             />
+          </div>
+          <div className="fix bottom left m1">
+            <a href="https://github.com/squamuglia" target="_blank">
+              Max
+            </a>,{' '}
+            <a href="https://github.com/creiser2" target="_blank">
+              Tony
+            </a>,{' '}
+            <a href="https://github.com/steven0608" target="_blank">
+              Steven
+            </a>
           </div>
         </div>
       </Router>

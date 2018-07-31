@@ -20,8 +20,10 @@ class MonsterContainer extends Component {
 
   getImage = e => {
     e.preventDefault();
-    const pngURI = document.getElementsByTagName('canvas')[0].toDataURL();
-    const data = { user_id: 1, url: pngURI };
+    const imgURI = document.getElementsByTagName('canvas')[0].toDataURL();
+    //this needs to be come a blob
+    // .toDataURL('image/jpeg', 0.7);
+    const data = { user_id: 1, url: imgURI };
     console.log('data before fetch', data);
     console.log(
       'fetch url',
