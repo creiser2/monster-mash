@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 //routes
 import NavBar from '../components/NavBar';
@@ -44,7 +44,6 @@ class App extends Component {
   //when someone logs in this is triggered
   handleLogin = (event, loginState) => {
     event.preventDefault();
-    debugger;
     fetch('http://localhost:3000/api/v1/login', {
       headers: { 'Content-Type': 'application/json'},
       method: 'POST',
@@ -52,13 +51,16 @@ class App extends Component {
         username: loginState.username,
         password: loginState.password
       })
-    }).then(response => response.json()).then(json => this.setState({
+    }).then(response => response.json())
+    .then(json => {
+      localStorage.setItem('token', json.token);
+      this.setState({
       token: json.token,
       username: json.user_details.username,
       bio: json.user_details.bio,
       single: json.user_details.single,
       logged_in: true
-    }))
+    })})
   };
 
   //when someone signs up this is triggered
