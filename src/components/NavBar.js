@@ -2,21 +2,11 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import logo from '../logo.svg';
 
-/* Add basic styling for NavLinks */
-const link = {
-  width: '100px',
-  padding: '12px',
-  margin: '0 6px 6px',
-  background: 'blue',
-  textDecoration: 'none',
-  color: 'white'
-};
-
 export const NavBar = props => {
   return (
     <div className="x f aic jce px1">
       <NavLink to="/" className="fa jss no-under">
-        <img src={logo} className="logo" />
+        <img src={logo} className="logo" alt="logo" />
       </NavLink>
       <div className="fa jss">
         <div className="flr f aic l4">

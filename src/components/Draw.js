@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { SketchField, Tools } from 'react-sketch';
 
-class MonsterContainer extends Component {
+class Draw extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,26 +20,36 @@ class MonsterContainer extends Component {
 
   getImage = e => {
     e.preventDefault();
-    const imgURI = document.getElementsByTagName('canvas')[0].toDataURL();
-    //this needs to be come a blob
-    // .toDataURL('image/jpeg', 0.7);
-    const data = { user_id: 1, url: imgURI };
-    console.log('data before fetch', data);
-    console.log(
-      'fetch url',
-      `http://localhost:3000/api/v1/${this.state.currentPart}`
-    );
+    const canvas = document.getElementsByTagName('canvas')[0];
+    const dataImg = canvas.toDataURL();
+    const data = { user_id: 1, url: dataImg };
+
+    console.log('data stringified', JSON.stringify(data));
+
     fetch(`http://localhost:3000/api/v1/${this.state.currentPart}`, {
       method: 'POST',
-
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json' //'multipart/form-data'
       },
       body: JSON.stringify(data)
     })
       .then(r => r.json())
       .then(r => console.log('drawing post response', r));
+
+    // const blob = new Blob([JSON.stringify(dataImg)], { type: 'image/jpeg' });
+    // const formData = new FormData();
+    // let formData = JSON.stringify({ user_id: 1, image: dataImg });
+
+    // // formData.append('user_id', 1);
+    // // formData.append('image', blob);
+    // console.log('form data', formData);
+
+    // const imgURI = canvas.toDataURL();
+    //this needs to be come a blob
+    // .toDataURL('image/jpeg', 0.7);
+    // const data = { user_id: 1, url: dataImg };
+    // console.log('data before fetch', data);
 
     // const form = document.querySelector('#form1');
     // const data = new FormData(form);
@@ -96,14 +106,14 @@ class MonsterContainer extends Component {
             />
 
             {/* <form id="form1">
-            <input type="file" name="image" id="image_upload" accept="image/*" />
-            <input
-              type="submit"
-              value="Submit"
-              id="submit"
-              onClick={this.getImage}
-            />
-          </form> */}
+              <input
+                className="px2 py05 mt1 h5 button"
+                type="submit"
+                value="Submit"
+                id="submit"
+                onClick={this.getImage}
+              />
+            </form> */}
 
             <button className="px2 py05 mt1 h5" onClick={this.getImage}>
               Submit
@@ -115,4 +125,4 @@ class MonsterContainer extends Component {
   }
 }
 
-export default MonsterContainer;
+export default Draw;

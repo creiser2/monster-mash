@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 //routes
@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   createPartsArray = (json, partName) => {
-    if (json.status != 500) {
+    if (json.status !== 500) {
       const partsArray = json.map(part => part.url);
       this.setState({ [partName]: partsArray }, () =>
         console.log('app state change', this.state)
@@ -113,13 +113,25 @@ class App extends Component {
             />
           </div>
           <div className="fix bottom left m1">
-            <a href="https://github.com/squamuglia" target="_blank">
+            <a
+              href="https://github.com/squamuglia"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Max
             </a>,{' '}
-            <a href="https://github.com/creiser2" target="_blank">
+            <a
+              href="https://github.com/creiser2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Tony
             </a>,{' '}
-            <a href="https://github.com/steven0608" target="_blank">
+            <a
+              href="https://github.com/steven0608"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Steven
             </a>
           </div>

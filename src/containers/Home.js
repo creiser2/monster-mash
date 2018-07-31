@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import MonsterContainer from './MonsterContainer'
+import Draw from '../components/Draw';
 
 class Home extends Component {
   render() {
-    return(
-      <MonsterContainer />
-    )
+    return <Draw />;
   }
 }
 
-export default Home
+export default Home;
