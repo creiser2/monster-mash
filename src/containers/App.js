@@ -18,6 +18,7 @@ class App extends Component {
       bio: '',
       single: false,
       logged_in: false,
+      userid: null,
       heads: [],
       body: [],
       feet: []
@@ -59,6 +60,7 @@ class App extends Component {
       username: json.user_details.username,
       bio: json.user_details.bio,
       single: json.user_details.single,
+      userid: json.user_details.id,
       logged_in: true
     })})
   };
@@ -84,6 +86,7 @@ class App extends Component {
           username: json.user_details.username,
           bio: json.user_details.bio,
           single: json.user_details.single,
+          userid: json.user_details.id,
           logged_in: true
         });
       });
