@@ -13,6 +13,7 @@ const link = {
 };
 
 export const NavBar = props => {
+
   return (
     <div className="x f aic jce px1">
       <NavLink to="/" className="fa jss no-under">
@@ -27,8 +28,10 @@ export const NavBar = props => {
             Draw
           </NavLink>
           {!!props.username ?
-            <NavLink to="/draw" className="px05 fa">
-              Welcome, {props.username}
+            <NavLink to="/" className="px05 fa">
+              <button onClick={props.onClick} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave}>
+                {props.displayValue}
+              </button>
             </NavLink>
           :
           <div>

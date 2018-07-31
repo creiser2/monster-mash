@@ -19,6 +19,7 @@ class App extends Component {
       single: false,
       logged_in: false,
       userid: null,
+      display_value: '',
       heads: [],
       body: [],
       feet: []
@@ -40,6 +41,25 @@ class App extends Component {
     fetch('http://localhost:3000/api/v1/feet')
       .then(r => r.json())
       .then(r => this.createPartsArray(r, 'feet'));
+
+      let token = localStorage.getItem('token');
+      if(token) {
+        fetch('http://localhost:3000/api/v1/trytoken', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+          }
+        }
+      ).then(response => response.json()).then(json => this.setState({
+        token: json.token,
+        username: json.user_details.username,
+        bio: json.user_details.bio,
+        single: json.user_details.single,
+        userid: json.user_details.id,
+        display_value: json.user_details.username,
+        logged_in: true
+      }))
+    }
   }
 
   //when someone logs in this is triggered
@@ -61,6 +81,7 @@ class App extends Component {
       bio: json.user_details.bio,
       single: json.user_details.single,
       userid: json.user_details.id,
+      display_value: json.user_details.username,
       logged_in: true
     })})
   };
@@ -87,17 +108,42 @@ class App extends Component {
           bio: json.user_details.bio,
           single: json.user_details.single,
           userid: json.user_details.id,
+          display_value: json.user_details.username,
           logged_in: true
         });
       });
   };
+
+  handleLogout = (event) => {
+    localStorage.removeItem('token')
+    this.setState({
+      token: '',
+      username: '',
+      bio: '',
+      single: false,
+      logged_in: false,
+      userid: null,
+    })
+  }
+
+  handleMouseEnterUsername = (event) => {
+    this.setState({
+      display_value: 'LOGOUT'
+    })
+  }
+
+  handleMouserLeaveUsername = (event) => {
+    this.setState({
+      display_value: this.state.username
+    })
+  }
 
   render() {
 
     return (
       <Router>
         <div className="App">
-          <NavBar username={this.state.username}/>
+          <NavBar username={this.state.username} onClick={this.handleLogout} onMouseEnter={this.handleMouseEnterUsername} onMouseLeave={this.handleMouserLeaveUsername} displayValue={this.state.display_value}/>
           <div className="gutter">
             <Route
               exact
@@ -115,7 +161,11 @@ class App extends Component {
               exact
               path="/login"
               render={routerProps => (
-                <Login {...routerProps} onSubmit={this.handleLogin} />
+                this.state.logged_in? (
+                  <Redirect to="/"/>
+                ) : (
+                  <Login {...routerProps} onSubmit={this.handleLogin} />
+                )
               )}
             />
             <Route
