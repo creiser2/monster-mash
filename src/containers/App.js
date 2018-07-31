@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect,withRouter } from 'react-router-dom';
 
 //routes
 import NavBar from '../components/NavBar';
@@ -58,7 +58,11 @@ class App extends Component {
         userid: json.user_details.id,
         display_value: json.user_details.username,
         logged_in: true
-      }))
+      })).catch(err => {
+		  localStorage.removeItem('token')
+			this.props.history.push('/login');
+
+		})
     }
   }
 
@@ -83,7 +87,11 @@ class App extends Component {
       userid: json.user_details.id,
       display_value: json.user_details.username,
       logged_in: true
-    })})
+    })}).catch(err => {
+    localStorage.removeItem('token')
+    alert("Unauthorized")
+
+  })
   };
 
   //when someone signs up this is triggered
@@ -111,7 +119,13 @@ class App extends Component {
           display_value: json.user_details.username,
           logged_in: true
         });
-      });
+        this.props.history.push('/draw');
+      }).catch(err => {
+      localStorage.removeItem('token')
+      alert("Wrong taken!")
+
+    })
+
   };
 
   handleLogout = (event) => {
@@ -141,7 +155,6 @@ class App extends Component {
   render() {
 
     return (
-      <Router>
         <div className="App">
           <NavBar username={this.state.username} onClick={this.handleLogout} onMouseEnter={this.handleMouseEnterUsername} onMouseLeave={this.handleMouserLeaveUsername} displayValue={this.state.display_value}/>
           <div className="gutter">
@@ -181,9 +194,8 @@ class App extends Component {
             />
           </div>
         </div>
-      </Router>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
