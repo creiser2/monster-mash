@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import Home from './Home';
 import Login from '../components/Login';
+import UserPage from '../components/UserPage'
 import SignUp from '../components/SignUp';
 import GenerateMonster from '../components/GenerateMonster';
 
@@ -43,6 +44,21 @@ class App extends Component {
   //when someone logs in this is triggered
   handleLogin = (event, loginState) => {
     event.preventDefault();
+    debugger;
+    fetch('http://localhost:3000/api/v1/login', {
+      headers: { 'Content-Type': 'application/json'},
+      method: 'POST',
+      body: JSON.stringify({
+        username: loginState.username,
+        password: loginState.password
+      })
+    }).then(response => response.json()).then(json => this.setState({
+      token: json.token,
+      username: json.user_details.username,
+      bio: json.user_details.bio,
+      single: json.user_details.single,
+      logged_in: true
+    }))
   };
 
   //when someone signs up this is triggered
@@ -72,10 +88,11 @@ class App extends Component {
   };
 
   render() {
+
     return (
       <Router>
         <div className="App">
-          <NavBar />
+          <NavBar username={this.state.username}/>
           <div className="gutter">
             <Route
               exact

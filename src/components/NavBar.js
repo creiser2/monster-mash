@@ -26,12 +26,21 @@ export const NavBar = props => {
           <NavLink to="/draw" className="px05 fa">
             Draw
           </NavLink>
-          <NavLink to="/login" className="px05 fa">
-            Login
-          </NavLink>
-          <NavLink to="/sign-up" className="px05 fa">
-            Sign Up
-          </NavLink>
+          {!!props.username ?
+            <NavLink to="/draw" className="px05 fa">
+              Welcome, {props.username}
+            </NavLink>
+          :
+          <div>
+            <NavLink to="/login" className="px05 fa">
+              Login
+            </NavLink>
+
+            <NavLink to="/sign-up" className="px05 fa">
+              Sign Up
+            </NavLink>
+          </div>
+          }
         </div>
       </div>
     </div>
