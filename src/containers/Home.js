@@ -5,7 +5,7 @@ import MonsterContainer from './MonsterContainer'
 class Home extends Component {
   render() {
     return(
-      <MonsterContainer />
+      <MonsterContainer userid={this.props.userid} username={this.props.username}/>
     )
   }
 }
