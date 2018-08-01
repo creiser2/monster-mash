@@ -182,13 +182,25 @@ class App extends Component {
             />
           </div>
           <div className="fix bottom left m1">
-            <a href="https://github.com/squamuglia" target="_blank">
+            <a
+              href="https://github.com/squamuglia"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Max
             </a>,{' '}
-            <a href="https://github.com/creiser2" target="_blank">
+            <a
+              href="https://github.com/creiser2"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Tony
             </a>,{' '}
-            <a href="https://github.com/steven0608" target="_blank">
+            <a
+              href="https://github.com/steven0608"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Steven
             </a>
           </div>

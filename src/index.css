@@ -80,6 +80,8 @@
 
 a { color: #f000ff }
 
+.hot { color: #f000ff }
+
 .bg-white { background: #fff }
 
 .bg-90 { background: #222222e3 }
@@ -114,11 +116,3 @@ button, .button {
   font-weight: 700;
   text-transform: uppercase;
 }
-
-/* .tooltip {
-  visibility: hidden;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-} */
