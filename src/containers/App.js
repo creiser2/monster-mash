@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 //routes
 import NavBar from '../components/NavBar';
@@ -17,6 +17,7 @@ class App extends Component {
       bio: '',
       single: false,
       logged_in: false,
+      userid: null,
       heads: [],
       body: [],
       feet: []
@@ -24,35 +25,76 @@ class App extends Component {
   }
 
   createPartsArray = (json, partName) => {
-    if (json.status != 500) {
-      const partsArray = json.map(part => part.url);
-      this.setState({ [partName]: partsArray }, () =>
-        console.log('app state change', this.state)
-      );
-    }
+    const partsArray = json.map(part =>
+      Object.assign({}, { part: part.url, username: part.username })
+    );
+    this.setState({ [partName]: partsArray });
   };
 
   componentDidMount() {
-    fetch('http://localhost:3000/api/v1/heads')
+    fetch('https://monster-mash-api.herokuapp.com/api/v1/heads')
       .then(r => r.json())
       .then(r => this.createPartsArray(r, 'heads'));
-    fetch('http://localhost:3000/api/v1/hands')
+    fetch('https://monster-mash-api.herokuapp.com/api/v1/hands')
       .then(r => r.json())
       .then(r => this.createPartsArray(r, 'body'));
-    fetch('http://localhost:3000/api/v1/feet')
+    fetch('https://monster-mash-api.herokuapp.com/api/v1/feet')
       .then(r => r.json())
       .then(r => this.createPartsArray(r, 'feet'));
+
+    let token = localStorage.getItem('token');
+    if (token) {
+      fetch('https://monster-mash-api.herokuapp.com/api/v1/trytoken', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token
+        }
+      })
+        .then(response => response.json())
+        .then(json =>
+          this.setState({
+            token: json.token,
+            username: json.user_details.username,
+            bio: json.user_details.bio,
+            single: json.user_details.single,
+            userid: json.user_details.id,
+            display_value: json.user_details.username,
+            logged_in: true
+          })
+        );
+    }
   }
 
   //when someone logs in this is triggered
   handleLogin = (event, loginState) => {
     event.preventDefault();
+    fetch('https://monster-mash-api.herokuapp.com/api/v1/login', {
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+      body: JSON.stringify({
+        username: loginState.username,
+        password: loginState.password
+      })
+    })
+      .then(response => response.json())
+      .then(json => {
+        localStorage.setItem('token', json.token);
+        this.setState({
+          token: json.token,
+          username: json.user_details.username,
+          bio: json.user_details.bio,
+          single: json.user_details.single,
+          userid: json.user_details.id,
+          display_value: json.user_details.username,
+          logged_in: true
+        });
+      });
   };
 
   //when someone signs up this is triggered
   handleSignUpSubmit = (event, formInfo) => {
     event.preventDefault();
-    fetch('http://localhost:3000/api/v1/users', {
+    fetch('https://monster-mash-api.herokuapp.com/api/v1/users', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify({
@@ -70,16 +112,30 @@ class App extends Component {
           username: json.user_details.username,
           bio: json.user_details.bio,
           single: json.user_details.single,
+          userid: json.user_details.id,
+          display_value: json.user_details.username,
           logged_in: true
         });
       });
+  };
+
+  handleLogout = event => {
+    localStorage.removeItem('token');
+    this.setState({
+      token: '',
+      username: '',
+      bio: '',
+      single: false,
+      logged_in: false,
+      userid: null
+    });
   };
 
   render() {
     return (
       <Router>
         <div className="App">
-          <NavBar />
+          <NavBar username={this.state.username} onClick={this.handleLogout} />
           <div className="gutter">
             <Route
               exact
@@ -92,13 +148,26 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/draw" component={Home} />
+            <Route
+              exact
+              path="/draw"
+              component={() => (
+                <Home
+                  userid={this.state.userid}
+                  username={this.state.username}
+                />
+              )}
+            />
             <Route
               exact
               path="/login"
-              render={routerProps => (
-                <Login {...routerProps} onSubmit={this.handleLogin} />
-              )}
+              render={routerProps =>
+                this.state.logged_in ? (
+                  <Redirect to="/" />
+                ) : (
+                  <Login {...routerProps} onSubmit={this.handleLogin} />
+                )
+              }
             />
             <Route
               exact
