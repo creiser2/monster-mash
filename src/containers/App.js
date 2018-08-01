@@ -151,7 +151,12 @@ class App extends Component {
             <Route
               exact
               path="/draw"
-              component={() => <MonsterContainer userid={this.state.userid} />}
+              component={() => (
+                <MonsterContainer
+                  userid={this.state.userid}
+                  username={this.state.username}
+                />
+              )}
             />
             <Route
               exact
