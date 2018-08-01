@@ -19,13 +19,13 @@ class GenerateMonster extends Component {
         <button onClick={this.refreshMonster} className="px2 py05 mb1 h5">
           New Monster
         </button>
-        <img
-          src={this.randomPart(this.props.heads, 'head')}
-          width="100%"
-          height="auto"
-          className="block mxa"
-          alt="head"
-        />
+          <img
+            src={this.randomPart(this.props.heads, 'head')}
+            width="100%"
+            height="auto"
+            className="block mxa"
+            alt="head"
+          />
         <img
           src={this.randomPart(this.props.body, 'body')}
           width="100%"

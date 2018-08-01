@@ -156,7 +156,7 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/draw" component={() => <Home userid={this.state.userid} username={this.state.username}/>} />
+            <Route exact path="/draw" component={() => <Home userid={this.state.userid}/>} />
             <Route
               exact
               path="/login"
