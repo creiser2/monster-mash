@@ -5,9 +5,13 @@ class MonsterContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPart: 'heads'
+      currentPart: 'heads',
+      refresh: 0
     };
   }
+  refreshSketchField = () => {
+    this.setState({ refresh: this.state.refresh + 1 });
+  };
 
   changePart = part => {
     this.setState(
@@ -16,28 +20,38 @@ class MonsterContainer extends Component {
       },
       () => console.log('partstate', this.state)
     );
+    const canvas = document.getElementsByTagName('canvas')[0];
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+    this.refreshSketchField();
   };
 
   getImage = e => {
     e.preventDefault();
-    const canvas = document.getElementsByTagName('canvas')[0]
+    const canvas = document.getElementsByTagName('canvas')[0];
     const pngURI = canvas.toDataURL();
-    const data = { user_id: this.props.userid, url: pngURI, username: this.props.username };
+    const data = {
+      user_id: this.props.userid,
+      url: pngURI,
+      username: this.props.username
+    };
     console.log('data before fetch', data);
     console.log(
       'fetch url',
-      `http://localhost:3000/api/v1/${this.state.currentPart}`
+      `https://monster-mash-api.herokuapp.com/api/v1/${this.state.currentPart}`
     );
-    fetch(`http://localhost:3000/api/v1/${this.state.currentPart}`, {
-      method: 'POST',
+    fetch(
+      `https://monster-mash-api.herokuapp.com/api/v1/${this.state.currentPart}`,
+      {
+        method: 'POST',
 
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
-      },
-      body: JSON.stringify(data)
-    })
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('token')
+        },
+        body: JSON.stringify(data)
+      }
+    )
       .then(r => r.json())
       .then(r => console.log('drawing post response', r));
 
@@ -106,9 +120,7 @@ class MonsterContainer extends Component {
               onClick={this.getImage}
             />
           </form> */}
-            <p>
-              Drawing: {this.state.currentPart}
-            </p>
+            <p>Drawing: {this.state.currentPart}</p>
             <button className="px2 py05 mt1 h5" onClick={this.getImage}>
               Submit
             </button>

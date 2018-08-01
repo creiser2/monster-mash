@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 //routes
@@ -26,24 +26,29 @@ class App extends Component {
   }
 
   createPartsArray = (json, partName) => {
-    const partsArray = json.map(part => part.url);
-    this.setState({ [partName]: partsArray });
+    const partsArray = json.map(part =>
+      Object.assign({}, { part: part.url, username: part.username })
+    );
+    this.setState(
+      { [partName]: partsArray },
+      console.log('initial app state', this.state)
+    );
   };
 
   componentDidMount() {
-    fetch('http://localhost:3000/api/v1/heads')
+    fetch('https://monster-mash-api.herokuapp.com/api/v1/heads')
       .then(r => r.json())
       .then(r => this.createPartsArray(r, 'heads'));
-    fetch('http://localhost:3000/api/v1/hands')
+    fetch('https://monster-mash-api.herokuapp.com/api/v1/hands')
       .then(r => r.json())
       .then(r => this.createPartsArray(r, 'body'));
-    fetch('http://localhost:3000/api/v1/feet')
+    fetch('https://monster-mash-api.herokuapp.com/api/v1/feet')
       .then(r => r.json())
       .then(r => this.createPartsArray(r, 'feet'));
 
     let token = localStorage.getItem('token');
     if (token && token !== 'undefined') {
-      fetch('http://localhost:3000/api/v1/trytoken', {
+      fetch('https://monster-mash-api.herokuapp.com/api/v1/trytoken', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: token
@@ -67,7 +72,7 @@ class App extends Component {
   //when someone logs in this is triggered
   handleLogin = (event, loginState) => {
     event.preventDefault();
-    fetch('http://localhost:3000/api/v1/login', {
+    fetch('https://monster-mash-api.herokuapp.com/api/v1/login', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify({
@@ -93,12 +98,12 @@ class App extends Component {
   //when someone signs up this is triggered
   handleSignUpSubmit = (event, formInfo) => {
     event.preventDefault();
-    fetch('http://localhost:3000/api/v1/users', {
+    fetch('https://monster-mash-api.herokuapp.com/api/v1/users', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify({
         username: formInfo.username,
-        password: formInfo.password,
+        password_digest: formInfo.password,
         bio: formInfo.bio,
         single: formInfo.single
       })
@@ -130,17 +135,17 @@ class App extends Component {
     });
   };
 
-  handleMouseEnterUsername = event => {
-    this.setState({
-      display_value: 'LOGOUT'
-    });
-  };
+  // handleMouseEnterUsername = event => {
+  //   this.setState({
+  //     display_value: 'LOGOUT'
+  //   });
+  // };
 
-  handleMouserLeaveUsername = event => {
-    this.setState({
-      display_value: this.state.username
-    });
-  };
+  // handleMouserLeaveUsername = event => {
+  //   this.setState({
+  //     display_value: this.state.username
+  //   });
+  // };
 
   render() {
     return (
@@ -168,7 +173,12 @@ class App extends Component {
             <Route
               exact
               path="/draw"
-              component={() => <MonsterContainer userid={this.state.userid} />}
+              component={() => (
+                <MonsterContainer
+                  userid={this.state.userid}
+                  username={this.state.username}
+                />
+              )}
             />
             <Route
               exact
