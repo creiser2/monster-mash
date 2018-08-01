@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 //routes
 import NavBar from '../components/NavBar';
-import Home from './Home';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 import GenerateMonster from '../components/GenerateMonster';
+import MonsterContainer from '../components/MonsterContainer';
 
 class App extends Component {
   constructor(props) {
@@ -43,8 +43,8 @@ class App extends Component {
       .then(r => this.createPartsArray(r, 'feet'));
 
     let token = localStorage.getItem('token');
-    if (token) {
-      fetch('https://monster-mash-api.herokuapp.com/api/v1/trytoken', {
+    if (token && token !== 'undefined') {
+      fetch('http://localhost:3000/api/v1/trytoken', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: token
@@ -151,12 +151,7 @@ class App extends Component {
             <Route
               exact
               path="/draw"
-              component={() => (
-                <Home
-                  userid={this.state.userid}
-                  username={this.state.username}
-                />
-              )}
+              component={() => <MonsterContainer userid={this.state.userid} />}
             />
             <Route
               exact
