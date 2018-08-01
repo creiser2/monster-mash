@@ -44,7 +44,7 @@ class App extends Component {
 
     let token = localStorage.getItem('token');
     if (token && token !== 'undefined') {
-      fetch('http://localhost:3000/api/v1/trytoken', {
+      fetch('https://monster-mash-api.herokuapp.com/api/v1/trytoken', {
         headers: {
           'Content-Type': 'application/json',
           Authorization: token
