@@ -24,12 +24,9 @@ class GenerateMonster extends Component {
       selectedPart = { part: `http://insta.topset.co/${alt}.png` };
     }
 
-    this.setState(
-      {
-        [alt]: selectedPart
-      },
-      () => console.log('current state', this.state)
-    );
+    this.setState({
+      [alt]: selectedPart
+    });
   };
 
   refreshMonster = () => {

@@ -28,10 +28,7 @@ class App extends Component {
     const partsArray = json.map(part =>
       Object.assign({}, { part: part.url, username: part.username })
     );
-    this.setState(
-      { [partName]: partsArray },
-      console.log('initial app state', this.state)
-    );
+    this.setState({ [partName]: partsArray });
   };
 
   componentDidMount() {

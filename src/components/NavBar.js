@@ -5,6 +5,7 @@ import logo from '../logo.svg';
 class NavBar extends Component {
   constructor(props) {
     super(props);
+    console.log('navbar', this.props);
     this.state = {
       displayValue: this.props.username
     };
@@ -17,9 +18,12 @@ class NavBar extends Component {
   };
 
   handleMouserLeaveUsername = () => {
-    this.setState({
-      displayValue: this.props.username
-    });
+    this.setState(
+      {
+        displayValue: this.props.username
+      },
+      () => console.log('mouseover', this.props)
+    );
   };
 
   render() {
@@ -43,7 +47,9 @@ class NavBar extends Component {
                   onMouseEnter={this.handleMouseEnterUsername}
                   onMouseLeave={this.handleMouserLeaveUsername}
                 >
-                  {this.state.displayValue}
+                  {this.state.displayValue === ''
+                    ? this.props.username
+                    : this.state.displayValue}
                 </button>
               </NavLink>
             ) : (
