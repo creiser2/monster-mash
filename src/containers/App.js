@@ -1,11 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 //routes
 import NavBar from '../components/NavBar';
 import Home from './Home';
 import Login from '../components/Login';
-import UserPage from '../components/UserPage'
 import SignUp from '../components/SignUp';
 import GenerateMonster from '../components/GenerateMonster';
 
@@ -19,7 +18,6 @@ class App extends Component {
       single: false,
       logged_in: false,
       userid: null,
-      display_value: '',
       heads: [],
       body: [],
       feet: []
@@ -27,8 +25,13 @@ class App extends Component {
   }
 
   createPartsArray = (json, partName) => {
-    const partsArray = json.map(part => part.url);
-    this.setState({ [partName]: partsArray });
+    const partsArray = json.map(part =>
+      Object.assign({}, { part: part.url, username: part.username })
+    );
+    this.setState(
+      { [partName]: partsArray },
+      console.log('initial app state', this.state)
+    );
   };
 
   componentDidMount() {
@@ -42,23 +45,26 @@ class App extends Component {
       .then(r => r.json())
       .then(r => this.createPartsArray(r, 'feet'));
 
-      let token = localStorage.getItem('token');
-      if(token) {
-        fetch('https://monster-mash-api.herokuapp.com/api/v1/trytoken', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': token
-          }
+    let token = localStorage.getItem('token');
+    if (token) {
+      fetch('https://monster-mash-api.herokuapp.com/api/v1/trytoken', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token
         }
-      ).then(response => response.json()).then(json => this.setState({
-        token: json.token,
-        username: json.user_details.username,
-        bio: json.user_details.bio,
-        single: json.user_details.single,
-        userid: json.user_details.id,
-        display_value: json.user_details.username,
-        logged_in: true
-      }))
+      })
+        .then(response => response.json())
+        .then(json =>
+          this.setState({
+            token: json.token,
+            username: json.user_details.username,
+            bio: json.user_details.bio,
+            single: json.user_details.single,
+            userid: json.user_details.id,
+            display_value: json.user_details.username,
+            logged_in: true
+          })
+        );
     }
   }
 
@@ -66,24 +72,26 @@ class App extends Component {
   handleLogin = (event, loginState) => {
     event.preventDefault();
     fetch('https://monster-mash-api.herokuapp.com/api/v1/login', {
-      headers: { 'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify({
         username: loginState.username,
         password: loginState.password
       })
-    }).then(response => response.json())
-    .then(json => {
-      localStorage.setItem('token', json.token);
-      this.setState({
-      token: json.token,
-      username: json.user_details.username,
-      bio: json.user_details.bio,
-      single: json.user_details.single,
-      userid: json.user_details.id,
-      display_value: json.user_details.username,
-      logged_in: true
-    })})
+    })
+      .then(response => response.json())
+      .then(json => {
+        localStorage.setItem('token', json.token);
+        this.setState({
+          token: json.token,
+          username: json.user_details.username,
+          bio: json.user_details.bio,
+          single: json.user_details.single,
+          userid: json.user_details.id,
+          display_value: json.user_details.username,
+          logged_in: true
+        });
+      });
   };
 
   //when someone signs up this is triggered
@@ -114,36 +122,23 @@ class App extends Component {
       });
   };
 
-  handleLogout = (event) => {
-    localStorage.removeItem('token')
+  handleLogout = event => {
+    localStorage.removeItem('token');
     this.setState({
       token: '',
       username: '',
       bio: '',
       single: false,
       logged_in: false,
-      userid: null,
-    })
-  }
-
-  handleMouseEnterUsername = (event) => {
-    this.setState({
-      display_value: 'LOGOUT'
-    })
-  }
-
-  handleMouserLeaveUsername = (event) => {
-    this.setState({
-      display_value: this.state.username
-    })
-  }
+      userid: null
+    });
+  };
 
   render() {
-
     return (
       <Router>
         <div className="App">
-          <NavBar username={this.state.username} onClick={this.handleLogout} onMouseEnter={this.handleMouseEnterUsername} onMouseLeave={this.handleMouserLeaveUsername} displayValue={this.state.display_value}/>
+          <NavBar username={this.state.username} onClick={this.handleLogout} />
           <div className="gutter">
             <Route
               exact
@@ -156,17 +151,26 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/draw" component={() => <Home userid={this.state.userid} username={this.state.username}/>} />
+            <Route
+              exact
+              path="/draw"
+              component={() => (
+                <Home
+                  userid={this.state.userid}
+                  username={this.state.username}
+                />
+              )}
+            />
             <Route
               exact
               path="/login"
-              render={routerProps => (
-                this.state.logged_in? (
-                  <Redirect to="/"/>
+              render={routerProps =>
+                this.state.logged_in ? (
+                  <Redirect to="/" />
                 ) : (
                   <Login {...routerProps} onSubmit={this.handleLogin} />
                 )
-              )}
+              }
             />
             <Route
               exact
