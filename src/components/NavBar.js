@@ -28,7 +28,7 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div className="x f aic jce px1">
+      <div className="mt05 x f fw aic jce px1">
         <NavLink to="/" className="fa jss no-under">
           <img src={logo} className="logo" alt="Monster Mash" />
         </NavLink>
