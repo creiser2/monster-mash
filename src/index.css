@@ -50,7 +50,7 @@
 
 
 /* Containers */
-.gutter { max-width: 64rem; margin:0 auto; }
+.gutter { max-width: 64rem; margin:0 auto; padding: 0 1rem; }
 
 .monster { max-width: 30rem; margin: 0 auto; }
 

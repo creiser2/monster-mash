@@ -70,7 +70,7 @@ class MonsterContainer extends Component {
         <div className="x f">
           <div className="fa ac">
             <button
-              className="px2 py05 mt1 h5"
+              className="px1 my1 h5"
               onClick={() => this.changePart('heads')}
             >
               Head
@@ -78,7 +78,7 @@ class MonsterContainer extends Component {
           </div>
           <div className="fa ac">
             <button
-              className="px2 py05 mt1 h5"
+              className="px1 my1 h5"
               onClick={() => this.changePart('hands')}
             >
               Body
@@ -86,7 +86,7 @@ class MonsterContainer extends Component {
           </div>
           <div className="fa ac">
             <button
-              className="px2 py05 mt1 h5"
+              className="px1 my1 h5"
               onClick={() => this.changePart('feet')}
             >
               Feet
@@ -113,8 +113,8 @@ class MonsterContainer extends Component {
               onClick={this.getImage}
             />
           </form> */}
-            <p>Drawing: {this.state.currentPart}</p>
-            <button className="px2 py05 mt1 h5" onClick={this.getImage}>
+            <p className="s4">Drawing: {this.state.currentPart}</p>
+            <button className="px1 mt1 h5" onClick={this.getImage}>
               Submit
             </button>
           </div>
