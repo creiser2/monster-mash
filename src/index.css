@@ -116,3 +116,6 @@ button, .button {
   font-weight: 700;
   text-transform: uppercase;
 }
+
+
+button:focus {outline:0;}

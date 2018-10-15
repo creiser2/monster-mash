@@ -85,7 +85,7 @@ class GenerateMonster extends Component {
   render() {
     return (
       <div className="monster ac">
-        <button onClick={this.refreshMonster} className="px2 py05 mb1 h5">
+        <button onClick={this.refreshMonster} className="px2 py05 mb1 h5 o0">
           New Monster
         </button>
         {this.displayArtistHover()}
