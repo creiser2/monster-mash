@@ -25,9 +25,9 @@ class MonsterContainer extends Component {
     console.log('data before fetch', data);
     console.log(
       'fetch url',
-      `https://monster-mash-api.herokuapp.com/api/v1/${this.state.currentPart}`
+      `http://localhost:3000/api/v1/${this.state.currentPart}`
     );
-    fetch(`https://monster-mash-api.herokuapp.com/api/v1/${this.state.currentPart}`, {
+    fetch(`http://localhost:3000/api/v1/${this.state.currentPart}`, {
       method: 'POST',
 
       headers: {

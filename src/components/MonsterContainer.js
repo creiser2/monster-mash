@@ -30,10 +30,10 @@ class MonsterContainer extends Component {
     console.log('data before fetch', data);
     console.log(
       'fetch url',
-      `https://monster-mash-api.herokuapp.com/api/v1/${this.state.currentPart}`
+      `http://localhost:3000/api/v1/${this.state.currentPart}`
     );
     fetch(
-      `https://monster-mash-api.herokuapp.com/api/v1/${this.state.currentPart}`,
+      `http://localhost:3000/api/v1/${this.state.currentPart}`,
       {
         method: 'POST',
 
@@ -49,19 +49,6 @@ class MonsterContainer extends Component {
       .then(r => console.log('drawing post response', r));
 
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
-
-    // const form = document.querySelector('#form1');
-    // const data = new FormData(form);
-    // const blob = new Blob([pngURI], {
-    //   type: 'image/png',
-    //   filename: 'monster.png'
-    // });
-
-    // console.log(blob);
-
-    // data.append('user_id', 1);
-    // data.append('image', blob);
-    // console.log(data);
   };
 
   render() {
