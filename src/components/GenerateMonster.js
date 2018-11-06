@@ -26,7 +26,7 @@ class GenerateMonster extends Component {
     if (part.length) {
       selectedPart = part[Math.floor(Math.random() * part.length)];
     } else {
-      selectedPart = { part: `http://insta.topset.co/${alt}.png` };
+      selectedPart = { part: `https://monster-mash-api.herokuapp.com/api/v1/images/${alt}` };
     }
 
     this.setState({
