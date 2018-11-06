@@ -10,12 +10,9 @@ class MonsterContainer extends Component {
   }
 
   changePart = part => {
-    this.setState(
-      {
-        currentPart: part
-      },
-      () => console.log('partstate', this.state)
-    );
+    this.setState({
+      currentPart: part
+    });
   };
 
   getImage = e => {

@@ -26,13 +26,6 @@ class SignUp extends Component {
     });
   };
 
-  handleSingleChange = event => {
-    console.log(event.target.checked);
-    this.setState({
-      single: event.target.checked
-    });
-  };
-
   render() {
     return (
       <form
@@ -50,13 +43,7 @@ class SignUp extends Component {
         <input
           value={this.state.password}
           onChange={this.handlePasswordChange}
-        />
-        <label>Single?</label>
-        <input
-          className="inline-block x50"
-          type="checkbox"
-          value={this.state.single}
-          onChange={this.handleSingleChange}
+          type="password"
         />
         <label className="x">Profile Pic:</label>
         <input type="file" name="image" id="image_upload" accept="image/*" />

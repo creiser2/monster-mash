@@ -41,33 +41,24 @@ class GenerateMonster extends Component {
   };
 
   setCoords = event => {
-    this.setState(
-      {
-        artistHover: true,
-        hoverSelect: event.target.title,
-        coordX: event.clientX,
-        coordY: event.clientY
-      },
-      () => console.log('set coords', this.state)
-    );
+    this.setState({
+      artistHover: true,
+      hoverSelect: event.target.title,
+      coordX: event.clientX,
+      coordY: event.clientY
+    });
   };
 
   trueArtistHover = () => {
-    this.setState(
-      {
-        artistHover: true
-      },
-      () => console.log(this.state.artistHover)
-    );
+    this.setState({
+      artistHover: true
+    });
   };
 
   toggleArtistHover = () => {
-    this.setState(
-      {
-        artistHover: false
-      },
-      () => console.log(this.state.artistHover)
-    );
+    this.setState({
+      artistHover: false
+    });
   };
 
   displayArtistHover = () => {
