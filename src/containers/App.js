@@ -194,7 +194,7 @@ class App extends Component {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Tony
+              Carl
             </a>,{' '}
             <a
               href="https://github.com/steven0608"
