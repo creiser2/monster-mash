@@ -23,11 +23,11 @@ class Login extends Component {
     return(
       <form onSubmit = {(event) => this.props.onSubmit(event,this.state)} className="mw-1 mxa">
         <label>
-          username:
+          Username:
           <input type = "text" value = {this.state.username} onChange = {this.handleUsernameInput} />
         </label>
         <label>
-          password:
+          Password:
           <input type = "password" value = {this.state.password} onChange = {this.handlePasswordInput} />
         </label>
         <input type = "submit" value = "Submit" />
