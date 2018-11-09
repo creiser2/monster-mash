@@ -89,6 +89,7 @@ class App extends Component {
           logged_in: true
         });
       });
+      //TODO: NEED to handle unprocessable entity here
   };
 
   //when someone signs up this is triggered
